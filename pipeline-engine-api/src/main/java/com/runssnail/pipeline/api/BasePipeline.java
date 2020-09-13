@@ -36,6 +36,11 @@ public abstract class BasePipeline implements Pipeline {
     protected TerminateStrategy terminateStrategy;
 
     /**
+     * 错误处理器
+     */
+    private PipelineErrorHandler pipelineErrorHandler;
+
+    /**
      * Default constructor
      */
     public BasePipeline() {
@@ -114,5 +119,14 @@ public abstract class BasePipeline implements Pipeline {
 
     public void setTerminateStrategy(TerminateStrategy terminateStrategy) {
         this.terminateStrategy = terminateStrategy;
+    }
+
+    @Override
+    public PipelineErrorHandler getPipelineErrorHandler() {
+        return pipelineErrorHandler;
+    }
+
+    public void setPipelineErrorHandler(PipelineErrorHandler pipelineErrorHandler) {
+        this.pipelineErrorHandler = pipelineErrorHandler;
     }
 }

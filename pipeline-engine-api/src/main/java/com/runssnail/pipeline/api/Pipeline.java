@@ -11,6 +11,13 @@ import com.runssnail.pipeline.api.terminate.TerminateStrategy;
 public interface Pipeline extends Lifecycle {
 
     /**
+     * 唯一标识
+     *
+     * @return 唯一标识
+     */
+    String getPipelineId();
+
+    /**
      * 执行流程
      *
      * @param exchange 上下文
@@ -26,10 +33,11 @@ public interface Pipeline extends Lifecycle {
     TerminateStrategy getTerminateStrategy();
 
     /**
-     * 唯一标识
+     * 流程定义的错误统一处理器
      *
-     * @return 唯一标识
+     * @return PipelineErrorHandler
      */
-    String getPipelineId();
+    PipelineErrorHandler getPipelineErrorHandler();
+
 
 }

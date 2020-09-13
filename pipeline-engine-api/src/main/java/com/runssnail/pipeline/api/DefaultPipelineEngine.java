@@ -84,14 +84,23 @@ public class DefaultPipelineEngine implements PipelineEngine {
             return;
         }
 
-        TerminateStrategy terminateStrategy = resolveTerminateStrategy(pipeline);
-        exchange.setTerminateStrategy(terminateStrategy);
+        TerminateStrategy strategy = resolveTerminateStrategy(pipeline);
+        exchange.setTerminateStrategy(strategy);
         try {
             pipeline.execute(exchange);
         } catch (Exception e) {
-            this.pipelineErrorHandler.onException(exchange, e);
+            PipelineErrorHandler errorHandler = resolvePipelineErrorHandler(pipeline);
+            errorHandler.onException(exchange, e);
         }
 
+    }
+
+    private PipelineErrorHandler resolvePipelineErrorHandler(Pipeline pipeline) {
+        PipelineErrorHandler errorHandler = pipeline.getPipelineErrorHandler();
+        if (errorHandler != null) {
+            return errorHandler;
+        }
+        return this.pipelineErrorHandler;
     }
 
     /**
@@ -101,9 +110,9 @@ public class DefaultPipelineEngine implements PipelineEngine {
      * @return
      */
     private TerminateStrategy resolveTerminateStrategy(Pipeline pipeline) {
-        TerminateStrategy terminateStrategy = pipeline.getTerminateStrategy();
-        if (terminateStrategy != null) {
-            return terminateStrategy;
+        TerminateStrategy strategy = pipeline.getTerminateStrategy();
+        if (strategy != null) {
+            return strategy;
         }
 
         return this.terminateStrategy;
