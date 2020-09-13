@@ -18,7 +18,7 @@ import com.runssnail.pipeline.api.terminate.TerminateStrategy;
  * @author zhengwei
  * Created on 2020-09-12
  */
-public abstract class BaseExchange implements Exchange<ConcurrentMap<String, Object>> {
+public abstract class BaseExchange<T> implements Exchange<T> {
 
     /**
      * exchangeId 相当于请求ID
@@ -43,7 +43,7 @@ public abstract class BaseExchange implements Exchange<ConcurrentMap<String, Obj
     /**
      * 中间数据
      */
-    private ConcurrentMap<String, Object> body = new ConcurrentHashMap<>();
+    private T body;
 
     /**
      * 异常
@@ -81,7 +81,7 @@ public abstract class BaseExchange implements Exchange<ConcurrentMap<String, Obj
     }
 
     @Override
-    public Object getValue(String name) {
+    public Object getContextValue(String name) {
         Validate.notBlank(name);
 
         Object v = this.getValueFromBody(name);
@@ -96,9 +96,13 @@ public abstract class BaseExchange implements Exchange<ConcurrentMap<String, Obj
         return this.getAttribute(name);
     }
 
-    private Object getValueFromBody(String name) {
-        return this.body != null ? this.body.get(name) : null;
-    }
+    /**
+     * 从body解析属性值
+     *
+     * @param name 属性名
+     * @return
+     */
+    protected abstract Object getValueFromBody(String name);
 
     /**
      * @param name
@@ -116,6 +120,14 @@ public abstract class BaseExchange implements Exchange<ConcurrentMap<String, Obj
     @Override
     public Object getAttribute(String name) {
         return this.attributes.get(name);
+    }
+
+    @Override
+    public Object removeAttribute(String name) {
+        if (attributes == null) {
+            return null;
+        }
+        return attributes.remove(name);
     }
 
     @Override
@@ -144,6 +156,7 @@ public abstract class BaseExchange implements Exchange<ConcurrentMap<String, Obj
     }
 
     public void setAttributes(Map<String, Object> attributes) {
+        Validate.notNull(attributes);
         this.attributes = attributes;
     }
 
@@ -157,12 +170,13 @@ public abstract class BaseExchange implements Exchange<ConcurrentMap<String, Obj
     }
 
     @Override
-    public ConcurrentMap<String, Object> getBody() {
+    public T getBody() {
         return body;
     }
 
     @Override
-    public void setBody(ConcurrentMap<String, Object> body) {
+    public void setBody(T body) {
+        Validate.notNull(body);
         this.body = body;
     }
 

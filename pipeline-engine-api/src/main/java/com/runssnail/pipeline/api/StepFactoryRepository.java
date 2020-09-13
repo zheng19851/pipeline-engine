@@ -16,7 +16,8 @@ public interface StepFactoryRepository extends Lifecycle {
      * 根据step type找到对应的工厂
      *
      * @param type 类型
-     * @return
+     * @return StepFactory
+     * @throws StepDefinitionException
      */
     StepFactory getStepFactory(String type) throws StepDefinitionException;
 }

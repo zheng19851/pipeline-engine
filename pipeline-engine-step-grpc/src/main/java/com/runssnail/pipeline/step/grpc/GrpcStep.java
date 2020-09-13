@@ -6,6 +6,7 @@ import org.apache.commons.lang3.Validate;
 
 import com.runssnail.pipeline.api.BaseStep;
 import com.runssnail.pipeline.api.Exchange;
+import com.runssnail.pipeline.api.constant.ExchangeAttributeEnum;
 import com.runssnail.pipeline.api.exception.ExecuteException;
 
 
@@ -52,14 +53,20 @@ public class GrpcStep extends BaseStep {
 
     @Override
     protected void doExecute(Exchange exchange) throws ExecuteException {
+        // 流程ID
+        String pipelineId = exchange.getPipelineId();
+        // 阶段ID
+        String phaseId = exchange.getAttribute(ExchangeAttributeEnum.CURR_PHASE_ID.name()).toString();
 
-        // todo 根据参数映射，从上下文里获取对应的请求参数，并组装成gRPC请求参数
+        // todo 根据参数映射，从上下文里获取对应的请求参数，并组装成gRPC请求参数(参数映射)
+        // 从缓存中获取参数映射配置
+        // 根据pipelineId phaseId stepId找到对应的参数映射，一个流程里，可能存在一个不同的阶段调用相同的服务
 
         Map<String, Object> body = (Map<String, Object>) exchange.getBody();
 
         // todo 调gRPC服务
 
-        // 将grpc结果设置到上下文中
+        // 将grpc结果通过参数映射设置到上下文中
 
     }
 

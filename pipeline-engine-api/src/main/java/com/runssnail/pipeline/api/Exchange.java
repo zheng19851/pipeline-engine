@@ -71,6 +71,14 @@ public interface Exchange<T> extends Lifecycle {
     Object getAttribute(String name);
 
     /**
+     * 删除属性
+     *
+     * @param name 属性名
+     * @return 删除的属性值
+     */
+    Object removeAttribute(String name);
+
+    /**
      * 流程唯一标识
      *
      * @return
@@ -98,7 +106,7 @@ public interface Exchange<T> extends Lifecycle {
      * @param name 属性名
      * @return 属性值
      */
-    Object getValue(String name);
+    Object getContextValue(String name);
 
     /**
      * 数据
@@ -141,4 +149,5 @@ public interface Exchange<T> extends Lifecycle {
      * @param strategy 中断策略
      */
     void setTerminateStrategy(TerminateStrategy strategy);
+
 }

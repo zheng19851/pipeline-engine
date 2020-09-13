@@ -32,7 +32,7 @@ public class DefaultStepFactory extends BaseFactory implements StepFactory {
 
     @Override
     public String getType() {
-        return null;
+        return "default";
     }
 
     @Override

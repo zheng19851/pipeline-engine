@@ -13,6 +13,7 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.runssnail.pipeline.api.constant.ExchangeAttributeEnum;
 import com.runssnail.pipeline.api.exception.ExecuteException;
 import com.runssnail.pipeline.api.terminate.TerminateStrategy;
 
@@ -101,11 +102,13 @@ public abstract class BasePhase implements Phase {
         log.info("execute phase start {}", this.phaseId);
         long start = System.currentTimeMillis();
         try {
+            exchange.setAttribute(ExchangeAttributeEnum.CURR_PHASE_ID.name(), this.phaseId);
             beforeExecuteIfNecessary(exchange);
             doExecute(exchange);
             afterExecuteIfNecessary(exchange);
         } finally {
             log.info("execute phase start {}, cost {} ms", this.phaseId, (System.currentTimeMillis() - start));
+            exchange.removeAttribute(ExchangeAttributeEnum.CURR_PHASE_ID.name());
         }
 
     }
