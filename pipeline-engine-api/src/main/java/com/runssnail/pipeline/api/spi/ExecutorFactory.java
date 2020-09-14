@@ -1,4 +1,4 @@
-package com.runssnail.pipeline.api.concurrent;
+package com.runssnail.pipeline.api.spi;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;

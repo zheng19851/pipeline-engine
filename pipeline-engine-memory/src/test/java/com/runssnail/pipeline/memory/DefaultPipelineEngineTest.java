@@ -14,7 +14,7 @@ import com.runssnail.pipeline.api.PhaseRepository;
 import com.runssnail.pipeline.api.PipelineRepository;
 import com.runssnail.pipeline.api.StepFactoryRepository;
 import com.runssnail.pipeline.api.concurrent.DefaultExecutorFactory;
-import com.runssnail.pipeline.api.concurrent.ExecutorFactory;
+import com.runssnail.pipeline.api.spi.ExecutorFactory;
 import com.runssnail.pipeline.api.metadata.PipelineDefinitionRepository;
 import com.runssnail.pipeline.api.metadata.StepDefinitionRepository;
 import com.runssnail.pipeline.definition.mysql.MysqlStepDefinitionRepository;

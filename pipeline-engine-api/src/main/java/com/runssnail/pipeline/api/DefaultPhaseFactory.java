@@ -6,7 +6,7 @@ import java.util.concurrent.ExecutorService;
 import org.apache.commons.lang3.StringUtils;
 
 import com.runssnail.pipeline.api.metadata.PhaseDefinition;
-import com.runssnail.pipeline.api.concurrent.ExecutorFactory;
+import com.runssnail.pipeline.api.spi.ExecutorFactory;
 import com.runssnail.pipeline.api.constant.Constants;
 import com.runssnail.pipeline.api.exception.PhaseDefinitionException;
 import com.runssnail.pipeline.api.terminate.TerminateStrategy;

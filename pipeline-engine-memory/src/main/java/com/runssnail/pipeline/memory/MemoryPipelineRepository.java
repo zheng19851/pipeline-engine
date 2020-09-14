@@ -24,7 +24,7 @@ import com.runssnail.pipeline.api.Step;
 import com.runssnail.pipeline.api.StepFactoryRepository;
 import com.runssnail.pipeline.api.StepRepository;
 import com.runssnail.pipeline.api.concurrent.DefaultExecutorFactory;
-import com.runssnail.pipeline.api.concurrent.ExecutorFactory;
+import com.runssnail.pipeline.api.spi.ExecutorFactory;
 import com.runssnail.pipeline.api.constant.Constants;
 import com.runssnail.pipeline.api.exception.PipelineDefinitionException;
 import com.runssnail.pipeline.api.exception.StepDefinitionException;
