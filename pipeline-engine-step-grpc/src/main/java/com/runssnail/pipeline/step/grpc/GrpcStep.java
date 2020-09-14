@@ -16,7 +16,7 @@ import com.runssnail.pipeline.api.exception.ExecuteException;
  * @author zhengwei
  * Created on 2020-09-08
  */
-public class GrpcStep extends BaseStep {
+public class GrpcStep extends BaseStep<Map<String, Object>> {
 
     /**
      * 业务定义
@@ -52,7 +52,7 @@ public class GrpcStep extends BaseStep {
     }
 
     @Override
-    protected void doExecute(Exchange exchange) throws ExecuteException {
+    protected void doExecute(Exchange<Map<String, Object>> exchange) throws ExecuteException {
         // 流程ID
         String pipelineId = exchange.getPipelineId();
         // 阶段ID
@@ -62,7 +62,7 @@ public class GrpcStep extends BaseStep {
         // 从缓存中获取参数映射配置
         // 根据pipelineId phaseId stepId找到对应的参数映射，一个流程里，可能存在一个不同的阶段调用相同的服务
 
-        Map<String, Object> body = (Map<String, Object>) exchange.getBody();
+        Map<String, Object> body = exchange.getBody();
 
         // todo 调gRPC服务
 

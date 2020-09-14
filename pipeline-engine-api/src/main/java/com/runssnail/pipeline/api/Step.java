@@ -8,7 +8,7 @@ import com.runssnail.pipeline.api.terminate.TerminateStrategy;
  *
  * @author zhengwei
  */
-public interface Step extends Lifecycle {
+public interface Step<T> extends Lifecycle {
 
     /**
      * 唯一标识
@@ -23,7 +23,7 @@ public interface Step extends Lifecycle {
      * @param context 上下文
      * @throws ExecuteException
      */
-    void execute(Exchange context) throws ExecuteException;
+    void execute(Exchange<T> context) throws ExecuteException;
 
     /**
      * 中断策略

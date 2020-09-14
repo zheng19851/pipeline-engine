@@ -15,7 +15,7 @@ import com.runssnail.pipeline.api.terminate.TerminateStrategy;
  *
  * @author zhengwei
  */
-public abstract class BaseStep implements Step {
+public abstract class BaseStep<T> implements Step<T> {
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
     /**
@@ -74,7 +74,7 @@ public abstract class BaseStep implements Step {
      * @param exchange
      */
     @Override
-    public void execute(Exchange exchange) {
+    public void execute(Exchange<T> exchange) {
         log.info("execute step start {}", this.stepId);
         long start = System.currentTimeMillis();
         try {
@@ -120,7 +120,7 @@ public abstract class BaseStep implements Step {
      * @param exchange 数据交换
      * @throws ExecuteException
      */
-    protected abstract void doExecute(Exchange exchange) throws ExecuteException;
+    protected abstract void doExecute(Exchange<T> exchange) throws ExecuteException;
 
     @Override
     public StepErrorHandler getStepErrorHandler() {
