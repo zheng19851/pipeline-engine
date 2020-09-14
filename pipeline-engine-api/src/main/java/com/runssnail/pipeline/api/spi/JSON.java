@@ -8,7 +8,7 @@ import java.util.Map;
  * @author zhengwei
  * Created on 2020-09-09
  */
-public interface Json {
+public interface JSON {
 
     /**
      * 对象转json字符串

@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import com.runssnail.pipeline.api.exception.BasicErrorCode;
 import com.runssnail.pipeline.api.exception.ExecuteException;
-import com.runssnail.pipeline.api.spi.Json;
+import com.runssnail.pipeline.api.spi.JSON;
 
 /**
  * 默认的异常处理器
@@ -20,7 +20,7 @@ import com.runssnail.pipeline.api.spi.Json;
 public class DefaultPipelineErrorHandler implements PipelineErrorHandler {
     private final static Logger log = LoggerFactory.getLogger(DefaultPipelineErrorHandler.class);
 
-    private Json json;
+    private JSON json;
 
     @Override
     public void onException(Exchange exchange, Throwable t) {
@@ -69,11 +69,11 @@ public class DefaultPipelineErrorHandler implements PipelineErrorHandler {
         return msg;
     }
 
-    public Json getJson() {
+    public JSON getJson() {
         return json;
     }
 
-    public void setJson(Json json) {
+    public void setJson(JSON json) {
         this.json = json;
     }
 }
